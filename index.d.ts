@@ -10,4 +10,5 @@ export declare class Crypt {
   static bytesToHex(bytes: Uint8Array): string
   static wordsToBytes(words: Array<number>): Array<number>
   static bytesToWords(bytes: Uint8Array): Array<number>
+  static randomBytes(len: number): Array<number>
 }

@@ -129,3 +129,20 @@ test('wordsToBytes multiple words', (t) => {
 test('wordsToBytes empty', (t) => {
   t.deepEqual(Buffer.from(Crypt.wordsToBytes([])), Buffer.alloc(0))
 })
+
+test('randomBytes length', (t) => {
+  const bytes = Crypt.randomBytes(16)
+  t.is(bytes.length, 16)
+})
+
+test('randomBytes randomness', (t) => {
+  const a = Crypt.randomBytes(8)
+  const b = Crypt.randomBytes(8)
+  // 极小概率相等，这里只做基本不等性测试
+  t.not(Buffer.from(a).toString('hex'), Buffer.from(b).toString('hex'))
+})
+
+test('randomBytes zero', (t) => {
+  const bytes = Crypt.randomBytes(0)
+  t.is(bytes.length, 0)
+})

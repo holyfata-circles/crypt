@@ -6,6 +6,7 @@ mod hex_to_bytes;
 mod bytes_to_hex;
 mod words_to_bytes;
 mod bytes_to_words;
+mod random_bytes;
 
 #[macro_use]
 extern crate napi_derive;
@@ -58,5 +59,10 @@ impl Crypt {
     #[napi]
     pub fn bytes_to_words(bytes: &[u8]) -> Vec<u32> {
         bytes_to_words::bytes_to_words(bytes)
+    }
+
+    #[napi]
+    pub fn random_bytes(len: u32) -> Vec<u8> {
+        random_bytes::random_bytes(len as usize)
     }
 }

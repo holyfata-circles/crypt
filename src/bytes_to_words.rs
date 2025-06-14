@@ -1,7 +1,7 @@
 pub fn bytes_to_words(bytes: &[u8]) -> Vec<u32> {
     let mut words = vec![0u32; (bytes.len() + 3) / 4];
     let mut b = 0;
-    for (i, &byte) in bytes.iter().enumerate() {
+    for (_i, &byte) in bytes.iter().enumerate() {
         let word_index = b >> 5;
         let shift = 24 - (b % 32);
         words[word_index] |= (byte as u32) << shift;
