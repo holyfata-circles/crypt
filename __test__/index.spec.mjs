@@ -74,3 +74,58 @@ test('hexToBytes invalid', (t) => {
 test('hexToBytes empty', (t) => {
   t.deepEqual(Buffer.from(Crypt.hexToBytes("")), Buffer.alloc(0))
 })
+
+test('bytesToHex basic', (t) => {
+  t.is(Crypt.bytesToHex(Buffer.from("Man")), "4d616e")
+  t.is(Crypt.bytesToHex(Buffer.from("Hello")), "48656c6c6f")
+})
+
+test('bytesToHex empty', (t) => {
+  t.is(Crypt.bytesToHex(Buffer.alloc(0)), "")
+})
+
+test('bytesToHex symbols', (t) => {
+  t.is(Crypt.bytesToHex(Buffer.from("!\"#$%")), "2122232425")
+})
+
+test('bytesToWords basic', (t) => {
+  // [0x4d, 0x61, 0x6e, 0x48] -> [0x4d616e48]
+  t.deepEqual(Crypt.bytesToWords(Buffer.from([0x4d, 0x61, 0x6e, 0x48])), [0x4d616e48])
+})
+
+test('bytesToWords multiple words', (t) => {
+  // [0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x21, 0x22, 0x23] -> [0x48656c6c, 0x6f212223]
+  t.deepEqual(
+    Crypt.bytesToWords(Buffer.from([0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x21, 0x22, 0x23])),
+    [0x48656c6c, 0x6f212223]
+  )
+})
+
+test('bytesToWords empty', (t) => {
+  t.deepEqual(Crypt.bytesToWords(Buffer.alloc(0)), [])
+})
+
+test('bytesToWords not multiple of 4', (t) => {
+  // [0x12, 0x34, 0x56] -> [0x12345600]
+  t.deepEqual(Crypt.bytesToWords(Buffer.from([0x12, 0x34, 0x56])), [0x12345600])
+})
+
+test('wordsToBytes basic', (t) => {
+  // 0x4d616e48 = [0x4d, 0x61, 0x6e, 0x48]
+  t.deepEqual(
+    Buffer.from(Crypt.wordsToBytes([0x4d616e48])),
+    Buffer.from([0x4d, 0x61, 0x6e, 0x48])
+  )
+})
+
+test('wordsToBytes multiple words', (t) => {
+  // [0x48656c6c, 0x6f212223] -> [0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x21, 0x22, 0x23]
+  t.deepEqual(
+    Buffer.from(Crypt.wordsToBytes([0x48656c6c, 0x6f212223])),
+    Buffer.from([0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x21, 0x22, 0x23])
+  )
+})
+
+test('wordsToBytes empty', (t) => {
+  t.deepEqual(Buffer.from(Crypt.wordsToBytes([])), Buffer.alloc(0))
+})

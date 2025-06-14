@@ -3,6 +3,9 @@
 mod base64_to_bytes;
 mod bytes_to_base64;
 mod hex_to_bytes;
+mod bytes_to_hex;
+mod words_to_bytes;
+mod bytes_to_words;
 
 #[macro_use]
 extern crate napi_derive;
@@ -40,5 +43,20 @@ impl Crypt {
     #[napi]
     pub fn hex_to_bytes(hex: String) -> Vec<u8> {
         hex_to_bytes::hex_to_bytes(&hex)
+    }
+
+    #[napi]
+    pub fn bytes_to_hex(bytes: &[u8]) -> String {
+        bytes_to_hex::bytes_to_hex(bytes)
+    }
+
+    #[napi]
+    pub fn words_to_bytes(words: Vec<u32>) -> Vec<u8> {
+        words_to_bytes::words_to_bytes(&words)
+    }
+
+    #[napi]
+    pub fn bytes_to_words(bytes: &[u8]) -> Vec<u32> {
+        bytes_to_words::bytes_to_words(bytes)
     }
 }
