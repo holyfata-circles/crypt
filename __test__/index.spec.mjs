@@ -55,3 +55,22 @@ test('bytesToBase64 with symbols', (t) => {
 test('bytesToBase64 empty', (t) => {
   t.is(Crypt.bytesToBase64(Buffer.alloc(0)), "")
 })
+
+test('hexToBytes basic', (t) => {
+  t.deepEqual(Buffer.from(Crypt.hexToBytes("4d616e")), Buffer.from("Man"))
+  t.deepEqual(Buffer.from(Crypt.hexToBytes("48656c6c6f")), Buffer.from("Hello"))
+})
+
+test('hexToBytes odd length', (t) => {
+  // 忽略最后一个不完整的字符
+  t.deepEqual(Buffer.from(Crypt.hexToBytes("4d61f")), Buffer.from([0x4d, 0x61]))
+})
+
+test('hexToBytes invalid', (t) => {
+  // 非法字符被忽略
+  t.deepEqual(Buffer.from(Crypt.hexToBytes("zz4d61")), Buffer.from([0x4d, 0x61]))
+})
+
+test('hexToBytes empty', (t) => {
+  t.deepEqual(Buffer.from(Crypt.hexToBytes("")), Buffer.alloc(0))
+})

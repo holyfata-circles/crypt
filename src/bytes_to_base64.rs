@@ -1,5 +1,3 @@
-use crate::BASE64_MAP;
-
 pub fn bytes_to_base64(bytes: &[u8]) -> String {
     let base64map = crate::BASE64_MAP;
     let mut base64 = String::new();
