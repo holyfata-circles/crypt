@@ -1,0 +1,15 @@
+{
+  "name": "crypt-darwin-universal",
+  "version": "0.0.0",
+  "os": [
+    "darwin"
+  ],
+  "main": "crypt.darwin-universal.node",
+  "files": [
+    "crypt.darwin-universal.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  }
+}
