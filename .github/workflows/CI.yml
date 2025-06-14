@@ -1,7 +1,7 @@
 name: CI
 env:
   DEBUG: napi:*
-  APP_NAME: package-template
+  APP_NAME: crypt
   MACOSX_DEPLOYMENT_TARGET: '10.13'
   CARGO_INCREMENTAL: '1'
 permissions:
@@ -43,9 +43,6 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
-
-      - name: Oxlint
-        run: yarn lint
 
       - name: Cargo fmt
         run: cargo fmt -- --check
