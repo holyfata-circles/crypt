@@ -1,6 +1,7 @@
 #![deny(clippy::all)]
 
 mod base64_to_bytes;
+mod bytes_to_base64;
 
 #[macro_use]
 extern crate napi_derive;
@@ -28,5 +29,10 @@ impl Crypt {
     #[napi]
     pub fn base64_to_bytes(base64_str: String) -> Vec<u8> {
         base64_to_bytes::base64_to_bytes(base64_str)
+    }
+
+    #[napi]
+    pub fn bytes_to_base64(bytes: &[u8]) -> String {
+        bytes_to_base64::bytes_to_base64(bytes)
     }
 }
