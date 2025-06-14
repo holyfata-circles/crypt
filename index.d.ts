@@ -11,4 +11,6 @@ export declare class Crypt {
   static wordsToBytes(words: Array<number>): Array<number>
   static bytesToWords(bytes: Uint8Array): Array<number>
   static randomBytes(len: number): Array<number>
+  static rotl(value: number, shift: number): number
+  static rotr(value: number, shift: number): number
 }

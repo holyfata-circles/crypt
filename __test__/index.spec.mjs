@@ -146,3 +146,15 @@ test('randomBytes zero', (t) => {
   const bytes = Crypt.randomBytes(0)
   t.is(bytes.length, 0)
 })
+
+test('rotl basic', (t) => {
+  t.is(Crypt.rotl(0x12345678, 8), 0x34567812)
+  t.is(Crypt.rotl(0x12345678, 0), 0x12345678)
+  t.is(Crypt.rotl(0x12345678, 32), 0x12345678)
+})
+
+test('rotr basic', (t) => {
+  t.is(Crypt.rotr(0x12345678, 8), 0x78123456)
+  t.is(Crypt.rotr(0x12345678, 0), 0x12345678)
+  t.is(Crypt.rotr(0x12345678, 32), 0x12345678)
+})
